@@ -6,7 +6,7 @@ class Weather_Report(object):
 		self.url = 'http://apis.data.go.kr/1360000/WthrWrnInfoService/'
 		self.api_local = {}
 		self.api_data = {}
-		with open("weather_report_api_key.txt", "r", encoding='utf-8') as file, open("weather_report_local_num.txt", "r", encoding='utf-8') as file2:
+		with open(r"C:\Users\user\Desktop\MyProgram\MyProgram\WeatherReport\weather_report_api_key.txt", "r", encoding='utf-8') as file, open("weather_report_local_num.txt", "r", encoding='utf-8') as file2:
 			self.api_data['serviceKey']=file.readline()
 			for data in file2.readlines():
 				self.api_local[data.strip('\n').split('\t')[1]] = data.strip('\n').split('\t')[0]
