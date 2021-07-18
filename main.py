@@ -6,7 +6,7 @@ class Weather_Report(object):
 		self.url = 'http://apis.data.go.kr/1360000/WthrWrnInfoService/'
 		self.api_local = {}
 		self.api_data = {}
-		with open(r"C:\Users\pllab\Desktop\MyProgram\MyProgram\WeatherReport\weather_report_api_key.txt", "r", encoding='utf-8') as file, open("weather_report_local_num.txt", "r", encoding='utf-8') as file2:
+		with open(r"C:\Users\user\Desktop\MyProgram\MyProgram\WeatherReport\weather_report_api_key.txt", "r", encoding='utf-8') as file, open("weather_report_local_num.txt", "r", encoding='utf-8') as file2:
 			self.api_data['serviceKey']=file.readline()
 			for data in file2.readlines():
 				self.api_local[data.strip('\n').split('\t')[1]] = data.strip('\n').split('\t')[0]
@@ -27,9 +27,13 @@ class Weather_Report(object):
 					checking_dict[content[idx].get('stnId')] += 1
 			if checking_dict[self.api_local[local_name]] == 0:
 				print(f"{local_name} 지역에는 기상 정보가 없습니다!")
+				text = f'{local_name} 지역에는 기상 정보가 없습니다!'
+				return text
 			else:
 				print(f"{local_name} 지역에 {checking_dict[self.api_local[local_name]]}건의 기상정보문이 있습니다!")
-		else:	# 지역이름 미입력시
+				text = f"{local_name} 지역에 {checking_dict[self.api_local[local_name]]}건의 기상정보문이 있습니다!"
+				return text
+		elif local_name == "전부":	
 			query = f'?serviceKey={self.api_data["serviceKey"]}&numOfRows=11&pageNo=1&dataType=JSON'
 			res = requests.get(self.url + 'getWthrInfoList' + query)
 			text = res.text
