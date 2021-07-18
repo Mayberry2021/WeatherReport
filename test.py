@@ -1,5 +1,10 @@
-with open("weather_report_local_num.txt", "r", encoding='utf-8') as file2:
-	for data in file2.readlines():
-		data2 = data.strip('\n').split('\t')
-		print(data2)
-		
+import telegram
+from telegram.ext import Updater
+from telegram.ext import CommandHandler
+
+
+token = '1705576598:AAEbHpTrctEcuQTeM_ZboJE9VhZnKz2E14I'
+
+bot = telegram.Bot(token=token)
+updates = bot.getUpdates()
+print(updates)
